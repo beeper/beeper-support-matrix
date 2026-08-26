@@ -43,11 +43,13 @@
   .label-title { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
   .label-title h2 { font-size: 18px; font-weight: 500; }
   .availability-badge { font-size: 11px; padding: 3px 8px; border-radius: var(--radius-md); background: #FAEEDA; color: #854F0B; font-weight: 500; white-space: nowrap; }
+  .platform-badge { font-size: 11px; padding: 3px 8px; border-radius: var(--radius-md); background: #E6F1FB; color: #185FA5; font-weight: 500; white-space: nowrap; }
   .connection-badge { display: inline-block; margin-top: 7px; font-size: 11px; padding: 4px 9px; border-radius: var(--radius-md); background: #EEEDFE; color: #3C3489; font-weight: 500; white-space: nowrap; }
   .mode-switch { display: flex; align-items: center; gap: 4px; margin-top: 7px; }
   .mode-btn { font-size: 11px; padding: 4px 9px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg-primary); color: var(--text-secondary); }
   .mode-btn.active { border-color: var(--active-border); background: var(--active-bg); color: var(--active-text); }
   .support-summary { margin-left: auto; max-width: 330px; font-size: 12px; line-height: 1.45; color: var(--text-secondary); text-align: right; }
+  .connection-note { margin: -2px 0 14px; padding: 9px 11px; border-radius: var(--radius-md); background: var(--bg-secondary); color: var(--text-secondary); font-size: 12px; line-height: 1.4; }
 
   .feature-row, .feature-row-stacked { display: flex; justify-content: space-between; gap: 10px; border-bottom: 0.5px solid var(--border); font-size: 14px; }
   .feature-row { align-items: center; padding: 5px 0; }
@@ -102,7 +104,7 @@
 <main>
 <p class="section-label">Choose a chat app</p>
 <div class="network-grid" id="netGrid"></div>
-<p class="connection-intro">Choose a chat app, then choose how Beeper connects to it. <strong>Beeper Cloud</strong> keeps the connection running for you. <strong>On-Device</strong> connects through your device. <strong>Limited</strong> means the feature works with the restrictions described below. <strong>Not offered</strong> means the chat app itself does not have that feature. <strong>Not supported</strong> means the chat app has it, but this Beeper connection does not. <span class="audit-date">Information last checked August 25, 2026.</span></p>
+<p class="connection-intro">Choose a chat app, then choose how Beeper connects to it. <strong>Beeper Cloud</strong> keeps the connection running for you. <strong>On-Device</strong> connects through your device. <strong>Limited</strong> means the feature works with the restrictions described below. <strong>Not offered</strong> means the chat app itself does not have that feature. <strong>Not supported</strong> means the chat app has it, but this Beeper connection does not. <span class="audit-date">Information last checked August 26, 2026.</span></p>
 
 <div id="labelOutput"></div>
 <p id="statusOutput" class="visually-hidden" aria-live="polite"></p>
@@ -159,6 +161,7 @@ const networks = [
   'Instagram',
   'Telegram',
   'Signal',
+  'iMessage',
   'Google Messages',
   'Google Voice',
   'Google Chat',
@@ -207,16 +210,16 @@ const networkData = {
         receipts: cell('yes', 'Read receipts work both ways. Reading a message in WhatsApp also updates Beeper.'),
         push: cell('yes', 'Notifications can arrive while Beeper is closed.'),
         replies: cell('yes', 'Replies work both ways in direct messages and regular groups. Community Announcement Groups use threads instead.'),
-        files: cell('yes', 'Photos, videos, audio, GIFs, stickers, and documents work. View-once media comes into Beeper as a regular file that does not disappear.'),
-        voice: cell('yes', 'Voice messages work both ways. A view-once voice message comes into Beeper as regular audio that does not disappear.'),
-        history: cell('yes', 'When WhatsApp provides it, the import covers about one year across eligible chats and can sometimes reach roughly three years. Beeper starts with up to 50 messages per chat; scroll up to load 50 more at a time. Status updates, system chats, and groups you have left are not imported. Live updates from WhatsApp Channels are not reliable On-Device.'),
+        files: cell('yes', 'Photos, videos, audio, GIFs, stickers, and documents work. View-once media appears as a note telling you to open it in WhatsApp.'),
+        voice: cell('yes', 'Voice messages work both ways. View-once voice messages must be opened in WhatsApp.'),
+        history: cell('yes', 'When WhatsApp provides it, the import covers about one year across eligible chats and can sometimes reach roughly three years. Beeper starts with up to 50 messages per chat; scroll up to load 50 more at a time. Status updates, system chats, and groups you have left are not imported. WhatsApp Channels are not available On-Device; use Beeper Cloud for Channels.'),
         redactions: cell('yes', 'You can delete a message for everyone for up to two days. Beeper cannot start a “delete for me,” but one made in WhatsApp syncs to Beeper.'),
         createChat: cell('yes', 'You can start a DM by phone number or contact and create regular groups. Beeper cannot create WhatsApp Communities or Channels.'),
         edits: cell('yes', 'You can edit a message for up to 15 minutes. Imported history shows only the latest version.'),
         typing: cell('yes', 'Text typing indicators work both ways while the chat is open. Voice-recording and uploading indicators do not sync.'),
         captions: cell('yes', 'Captions work on photos, videos, GIFs, and documents. Audio, voice messages, and stickers do not carry captions.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, code, lists, quotes, and mentions work. Linked text and headings may look simpler in Beeper.'),
-        disappearing: cell('yes', '24-hour, 7-day, and 90-day timers work both ways. View-once media becomes ordinary media that does not disappear, and keeping a disappearing message appears only as a notice.'),
+        disappearing: cell('yes', '24-hour, 7-day, and 90-day timers work both ways. View-once media must be opened in WhatsApp, and keeping a disappearing message appears only as a notice.'),
         online: cell('no', 'Beeper does not show a contact’s online or last-seen status.'),
         polls: cell('yes', 'You can create polls and vote with up to 12 options of up to 100 characters each. Ending polls, hiding votes, and duplicate options are not supported. A poll sent in a Community Announcement thread may lose its thread placement.'),
         threads: cell('partial', 'Comments in Community Announcement Groups work both ways as threads. Regular WhatsApp chats use replies instead.'),
@@ -376,7 +379,7 @@ const networkData = {
         edits: cell('yes', 'You can edit each message up to 10 times within 24 hours. Note to Self does not have the 24-hour limit.'),
         typing: cell('yes', 'Typing indicators work both ways in direct messages and groups when they are enabled in Signal. Message requests do not send them until accepted.'),
         captions: cell('yes', 'Captions work on photos, videos, files, and GIFs, but not on voice messages or stickers.'),
-        formatting: cell('partial', 'Most Signal formatting works. Some lists, links, headings, and quotes may look simpler.'),
+        formatting: cell('partial', 'Signal’s bold, italics, strikethrough, spoilers, monospace, and mentions work both ways. Beeper-only formatting such as lists, linked text, headings, block quotes, underlining, and code blocks becomes simpler readable text in Signal.'),
         disappearing: cell('yes', 'Timers that start after a message is read work. View-once media disappears five minutes after it is read.'),
         online: cell('na'),
         polls: cell('partial', 'You can create polls and vote. Polls ended in Signal also show as ended in Beeper, but you cannot end one from Beeper. Polls that hide who voted are not supported.'),
@@ -395,11 +398,39 @@ const networkData = {
         edits: cell('yes', 'You can edit each message up to 10 times within 24 hours. Note to Self does not have the 24-hour limit.'),
         typing: cell('yes', 'Typing indicators work both ways in direct messages and groups when they are enabled in Signal. Message requests do not send them until accepted.'),
         captions: cell('yes', 'Captions work on photos, videos, files, and GIFs, but not on voice messages or stickers.'),
-        formatting: cell('partial', 'Most Signal formatting works. Some lists, links, headings, and quotes may look simpler.'),
+        formatting: cell('partial', 'Signal’s bold, italics, strikethrough, spoilers, monospace, and mentions work both ways. Beeper-only formatting such as lists, linked text, headings, block quotes, underlining, and code blocks becomes simpler readable text in Signal.'),
         disappearing: cell('yes', 'Timers that start after a message is read work. View-once messages are not removed automatically.'),
         online: cell('na'),
         polls: cell('partial', 'You can create polls and vote. Polls ended in Signal also show as ended in Beeper, but you cannot end one from Beeper. Polls that hide who voted are not supported.'),
         threads: cell('na'),
+      },
+    },
+  },
+
+  iMessage: {
+    modes: ['onDevice'],
+    availability: 'public',
+    platformLabel: 'Beeper Desktop for Mac only',
+    connectionNote: 'Available in Beeper Desktop on a Mac running macOS Big Sur or later. Beeper uses the Messages app on that Mac, which must stay open. This connection stays on that Mac and does not sync to your other Beeper devices.',
+    support: {
+      onDevice: {
+        reactions: cell('partial', 'Apple’s six Tapbacks work both ways. On macOS Sequoia or later, any emoji reaction also works; older versions are limited to the six Tapbacks. Some attachments and replies cannot be reacted to, and sticker reactions can appear but cannot be added or removed from Beeper.'),
+        receipts: cell('partial', 'Reading in Beeper marks the conversation read in Messages, and reading in Messages updates Beeper. One-to-one iMessage chats show read receipts when they are enabled in Messages. Beeper does not show who has read a group message. Marking chats read may be less reliable on macOS Monterey and earlier.'),
+        push: cell('no', 'Beeper can show notifications while Beeper Desktop and Messages are running on this Mac, including when the Beeper window is closed. It does not receive iMessage push notifications, so it cannot notify after Beeper is quit or while the Mac is asleep. Messages may still show its own macOS notifications.'),
+        replies: cell('partial', 'Replies work both ways. On macOS Monterey or later, you can reply to ordinary text and most media. On Big Sur, only ordinary text messages can be replied to; some iMessage app messages and replies cannot be selected.'),
+        files: cell('yes', 'Photos, videos, GIFs, audio, and other files work both ways, up to 100 MB per outgoing attachment. Incoming stickers appear as stickers; a sticker sent from Beeper is sent as a regular image.'),
+        voice: cell('oneway-in', 'Voice messages received from iMessage play as voice messages in Beeper. You cannot record or send an iMessage voice message from Beeper, but you can send an audio file.'),
+        history: cell('yes', 'Beeper reads the iMessage, SMS, and RCS history stored in Messages on this Mac. It starts with 25 recent chats and automatically adds recent chats until it reaches about one year of activity or 1,000 chats. Scroll down the chat list to load older chats 25 at a time. Each chat starts with about 20 recent messages; scroll up to load 20 more at a time. Beeper does not set a time or message cutoff. Recently deleted items, pending scheduled messages, and a few unsupported Messages system items are not included.'),
+        redactions: cell('partial', 'Incoming unsends sync. On macOS Ventura or later, you can undo-send your own iMessages during Apple’s two-minute window. Earlier macOS versions cannot unsend from Beeper. This does not delete a message only from your own history.'),
+        createChat: cell('yes', 'You can start a direct message or group conversation by phone number or email. You must send the first message, and Beeper cannot set a group name while creating it.'),
+        edits: cell('partial', 'Incoming edits and edit history appear. On macOS Ventura or later, you can edit your own text iMessages within Apple’s 15-minute, five-edit limit. Earlier macOS versions, SMS messages, and attachment-only messages cannot be edited.'),
+        typing: cell('oneway-out', 'People can see your text typing indicator in one-to-one iMessage chats. Sending it in group chats requires macOS Tahoe or later. Typing indicators from other people do not appear with Beeper’s normal setup. Voice-recording and uploading indicators do not sync.'),
+        captions: cell('partial', 'Text sent with a photo or file is preserved both ways, but it appears as a separate message rather than attached to the media.'),
+        formatting: cell('oneway-in', 'Bold, italics, underlining, strikethrough, links, and @mentions received from iMessage appear in Beeper. Messages sent from Beeper are plain text. iMessage screen and bubble effects appear only as a short label.'),
+        disappearing: cell('no', 'iMessage does not offer chat-wide disappearing-message timers. Its expiring audio messages are not fully synchronized: Beeper does not show their timer or offer Keep, and an expiration may not appear until the chat is reloaded.'),
+        online: cell('na', 'iMessage does not show when someone is online or last active.'),
+        polls: cell('partial', 'Polls appear as plain text with the question and numbered choices. You cannot create a poll, vote, see vote totals, or receive updated results from Beeper.'),
+        threads: cell('na', 'iMessage uses inline replies rather than separate chat threads. Those are covered under Replies.'),
       },
     },
   },
@@ -532,23 +563,23 @@ const networkData = {
     availability: 'public',
     support: {
       cloud: {
-        reactions: cell('yes'),
+        reactions: cell('yes', 'Standard and custom workspace emoji reactions work both ways, including adding and removing them.'),
         receipts: cell('na', 'Beeper keeps your place in Slack conversations, but Slack does not show other people whether you have read a message.'),
         push: cell('yes', 'Notifications can arrive while Beeper is closed. New Slack channel rooms start muted in Beeper; unmute a channel to enable its notifications. Slack notification settings are not imported.'),
         replies: cell('na', 'Slack does not offer quoted replies. It uses threads instead.'),
-        files: cell('yes'),
+        files: cell('yes', 'Photos, videos, GIFs, audio, and files up to Slack’s 1 GB limit work both ways, subject to workspace rules.'),
         voice: cell('partial', 'Voice messages work, but some recordings need to be converted. The maximum length is five minutes.'),
-        history: cell('partial', 'Beeper adds the DMs, group DMs, and channels Slack returns for your workspace, with up to 50 recent top-level messages in each. Scroll up to load older DMs and group DMs 50 at a time, with no Beeper-set limit. Channels can load 10 more batches of 50, up to 500 older messages. Threads load one page of up to 50 replies. When the connection starts, Beeper catches up with at most the 500 most recent missed messages. Slack retention and access rules still apply.'),
+        history: cell('partial', 'Beeper does not bring in every Slack message at once. It starts with a recent batch in each conversation, and you can scroll up to load older DMs and group DMs. Channel history and thread replies are more limited. Slack retention and access rules still apply.'),
         redactions: cell('yes', 'Deleting messages works when your Slack workspace allows members to delete them.'),
-        createChat: cell('yes', 'You can start direct messages and group conversations, and create public or private channels.'),
+        createChat: cell('partial', 'You can start direct messages and group DMs with 2–8 other people. Beeper cannot create Slack channels.'),
         edits: cell('yes', 'Editing follows your Slack workspace rules, which may set a time limit or disable editing.'),
-        typing: cell('partial', 'Typing indicators work both ways when you connect your Slack account normally. If your workspace uses a custom Slack app connection, Beeper cannot send your typing indicator.'),
-        captions: cell('yes'),
-        formatting: cell('partial', 'Most Slack formatting works. Underlining and code-block language labels are removed, and some Beeper room or message links are not converted.'),
+        typing: cell('yes', 'Typing indicators work both ways in DMs, group DMs, and channels. Slack does not identify which thread someone is typing in.'),
+        captions: cell('yes', 'Captions work on media and files. With several files in one Slack message, the text may appear separately rather than on every file.'),
+        formatting: cell('partial', 'Bold, italics, strikethrough, code, quotes, lists, links, mentions, and custom emoji work. Underlining is removed, headings become bold text with # marks, and some Beeper room or message links remain Beeper links.'),
         disappearing: cell('na'),
-        online: cell('no'),
+        online: cell('no', 'Slack online and away status does not sync to Beeper.'),
         polls: cell('na'),
-        threads: cell('yes'),
+        threads: cell('yes', 'Threads work in DMs, group DMs, and channels. The initial import includes up to 50 replies per thread.'),
       },
     },
   },
@@ -744,6 +775,23 @@ function validateData() {
     if (!Object.prototype.hasOwnProperty.call(availabilityLabels, network.availability)) {
       errors.push('Invalid availability ' + network.availability + ' for ' + networkKey);
     }
+    if (network.availabilityByMode) {
+      network.modes.forEach(function(mode) {
+        const modeAvailability = network.availabilityByMode[mode];
+        if (!Object.prototype.hasOwnProperty.call(availabilityLabels, modeAvailability)) {
+          errors.push('Invalid availability ' + modeAvailability + ' for ' + networkKey + '/' + mode);
+        }
+      });
+      Object.keys(network.availabilityByMode).forEach(function(mode) {
+        if (network.modes.indexOf(mode) === -1) errors.push('Availability declared for unknown mode ' + mode + ' in ' + networkKey);
+      });
+    }
+    if (network.platformLabel && typeof network.platformLabel !== 'string') {
+      errors.push('Invalid platform label for ' + networkKey);
+    }
+    if (network.connectionNote && typeof network.connectionNote !== 'string') {
+      errors.push('Invalid connection note for ' + networkKey);
+    }
 
     network.modes.forEach(function(mode) {
       if (!Object.prototype.hasOwnProperty.call(modeLabels, mode)) {
@@ -832,8 +880,10 @@ function render(networkKey, focusMode) {
 
   let html = '<div class="label-card">';
   html += '<div class="label-header"><div class="label-main"><div class="label-title"><h2>' + networkLabel + ' on Beeper</h2>';
-  const availabilityLabel = availabilityLabels[network.availability];
+  const availability = network.availabilityByMode ? network.availabilityByMode[mode] : network.availability;
+  const availabilityLabel = availabilityLabels[availability];
   if (availabilityLabel) html += '<span class="availability-badge">' + availabilityLabel + '</span>';
+  if (network.platformLabel) html += '<span class="platform-badge">' + network.platformLabel + '</span>';
   html += '</div>';
 
   if (network.modes.length === 1) {
@@ -848,6 +898,7 @@ function render(networkKey, focusMode) {
   }
 
   html += '</div><div class="support-summary">' + summaryFor(modeData) + '</div></div>';
+  if (network.connectionNote) html += '<p class="connection-note">' + network.connectionNote + '</p>';
 
   featureGroups.forEach(function(group, groupIndex) {
     if (groupIndex > 0) html += '<div class="divider"></div>';
