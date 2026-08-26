@@ -569,7 +569,7 @@ const networkData = {
         replies: cell('na', 'Slack does not offer quoted replies. It uses threads instead.'),
         files: cell('yes', 'Photos, videos, GIFs, audio, and files up to Slack’s 1 GB limit work both ways, subject to workspace rules.'),
         voice: cell('partial', 'Voice messages work, but some recordings need to be converted. The maximum length is five minutes.'),
-        history: cell('partial', 'Beeper adds the DMs, group DMs, and channels Slack returns for your workspace, with up to 50 recent top-level messages in each. Scroll up to load older DMs and group DMs 50 at a time, with no Beeper-set limit. Channels can load 10 more batches of 50, up to 500 older messages. Threads load one page of up to 50 replies. When the connection starts, Beeper catches up with at most the 500 most recent missed messages. Slack retention and access rules still apply.'),
+        history: cell('partial', 'Beeper does not bring in every Slack message at once. It starts with a recent batch in each conversation, and you can scroll up to load older DMs and group DMs. Channel history and thread replies are more limited. Slack retention and access rules still apply.'),
         redactions: cell('yes', 'Deleting messages works when your Slack workspace allows members to delete them.'),
         createChat: cell('partial', 'You can start direct messages and group DMs with 2–8 other people. Beeper cannot create Slack channels.'),
         edits: cell('yes', 'Editing follows your Slack workspace rules, which may set a time limit or disable editing.'),
