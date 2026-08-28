@@ -144,6 +144,7 @@ const featureGroups = [
   {
     label: 'Other features',
     features: [
+      { key: 'timeBasedMedia', label: 'Time-based media' },
       { key: 'online', label: 'Online status' },
       { key: 'polls', label: 'Polls' },
       { key: 'threads', label: 'Threads' },
@@ -201,6 +202,7 @@ const networkData = {
         captions: cell('yes', 'Captions work on photos, videos, GIFs, and documents. Audio, voice messages, and stickers do not carry captions.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, code, lists, quotes, and mentions work. Linked text and headings may look simpler in Beeper.'),
         disappearing: cell('yes', '24-hour, 7-day, and 90-day timers work both ways. View-once media must be opened in WhatsApp, and keeping a disappearing message appears only as a notice.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'Beeper does not show a contact’s online or last-seen status.'),
         polls: cell('yes', 'You can create polls and vote with up to 12 options of up to 100 characters each. Ending polls, hiding votes, and duplicate options are not supported. A poll sent in a Community Announcement thread may lose its thread placement.'),
         threads: cell('partial', 'Comments in Community Announcement Groups work both ways as threads. Regular WhatsApp chats use replies instead.'),
@@ -220,6 +222,7 @@ const networkData = {
         captions: cell('yes', 'Captions work on photos, videos, GIFs, and documents. Audio, voice messages, and stickers do not carry captions.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, code, lists, quotes, and mentions work. Linked text and headings may look simpler in Beeper.'),
         disappearing: cell('yes', '24-hour, 7-day, and 90-day timers work both ways. View-once media must be opened in WhatsApp, and keeping a disappearing message appears only as a notice.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'Beeper does not show a contact’s online or last-seen status.'),
         polls: cell('yes', 'You can create polls and vote with up to 12 options of up to 100 characters each. Ending polls, hiding votes, and duplicate options are not supported. A poll sent in a Community Announcement thread may lose its thread placement.'),
         threads: cell('partial', 'Comments in Community Announcement Groups work both ways as threads. Regular WhatsApp chats use replies instead.'),
@@ -246,6 +249,7 @@ const networkData = {
         captions: cell('partial', 'Captions work on photos, videos, and files in chats without end-to-end encryption. They do not carry over on audio, voice messages, GIFs, stickers, or encrypted chats.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, quotes, and code work both ways.'),
         disappearing: cell('partial', 'Message timers work in end-to-end encrypted chats. Regular chats do not offer a timer, and view-once media must be opened in Messenger.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('no'),
         threads: cell('partial', 'Only Messenger Community group threads are supported. New replies work, but older thread history may be incomplete.'),
@@ -265,6 +269,7 @@ const networkData = {
         captions: cell('partial', 'Captions work on photos, videos, and files in chats without end-to-end encryption. They do not carry over on audio, voice messages, GIFs, stickers, or encrypted chats.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, quotes, and code work both ways.'),
         disappearing: cell('partial', 'Message timers work in end-to-end encrypted chats. Regular chats do not offer a timer, and view-once media must be opened in Messenger.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('no'),
         threads: cell('partial', 'Only Messenger Community group threads are supported. New replies work, but older thread history may be incomplete.'),
@@ -291,6 +296,7 @@ const networkData = {
         captions: cell('yes', 'Instagram sends caption text as a separate message instead of attaching it to the photo, video, GIF, or audio. Beeper does the same, so the text still arrives. Shared posts and reels you receive can include their Instagram text and link.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, quotes, and code work both ways.'),
         disappearing: cell('no', 'Disappearing-message timers do not sync. View-once photos and videos must be opened in Instagram; Beeper shows a notice instead.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('no'),
         threads: cell('na'),
@@ -310,6 +316,7 @@ const networkData = {
         captions: cell('no', 'Captions on photos, videos, audio, GIFs, and other media do not appear in Beeper.'),
         formatting: cell('yes', 'Bold, italics, strikethrough, quotes, and code work both ways.'),
         disappearing: cell('no', 'Disappearing-message timers do not sync. View-once photos and videos must be opened in Instagram; Beeper shows a notice instead.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('no'),
         threads: cell('na'),
@@ -336,6 +343,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('partial', 'Most formatting works. Some lists, headings, and custom emoji may look simpler.'),
         disappearing: cell('yes', 'Disappearing-message timers work. Telegram forum topics share their parent chat\'s timer. View-once photos and videos can only be opened in Telegram.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('partial', 'Polls appear as plain text with the question and choices. You cannot create or vote in them from Beeper.'),
         threads: cell('partial', 'Forum topics appear as separate chats. You cannot create a topic or use Beeper\'s own thread view.'),
@@ -355,6 +363,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('partial', 'Most formatting works. Some lists, headings, and custom emoji may look simpler.'),
         disappearing: cell('yes', 'Disappearing-message timers work. Telegram forum topics share their parent chat\'s timer. View-once photos and videos can only be opened in Telegram.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('partial', 'Polls appear as plain text with the question and choices. You cannot create or vote in them from Beeper.'),
         threads: cell('partial', 'Forum topics appear as separate chats. You cannot create a topic or use Beeper\'s own thread view.'),
@@ -381,6 +390,7 @@ const networkData = {
         captions: cell('yes', 'Captions work on photos, videos, files, and GIFs, but not on voice messages or stickers.'),
         formatting: cell('partial', 'Signal’s bold, italics, strikethrough, spoilers, monospace, and mentions work both ways. Beeper-only formatting such as lists, linked text, headings, block quotes, underlining, and code blocks becomes simpler readable text in Signal.'),
         disappearing: cell('yes', 'Timers that start after a message is read work. View-once media disappears five minutes after it is read.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('partial', 'You can create polls and vote. Polls ended in Signal also show as ended in Beeper, but you cannot end one from Beeper. Polls that hide who voted are not supported.'),
         threads: cell('na'),
@@ -400,6 +410,7 @@ const networkData = {
         captions: cell('yes', 'Captions work on photos, videos, files, and GIFs, but not on voice messages or stickers.'),
         formatting: cell('partial', 'Signal’s bold, italics, strikethrough, spoilers, monospace, and mentions work both ways. Beeper-only formatting such as lists, linked text, headings, block quotes, underlining, and code blocks becomes simpler readable text in Signal.'),
         disappearing: cell('yes', 'Timers that start after a message is read work. View-once messages are not removed automatically.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('partial', 'You can create polls and vote. Polls ended in Signal also show as ended in Beeper, but you cannot end one from Beeper. Polls that hide who voted are not supported.'),
         threads: cell('na'),
@@ -428,6 +439,7 @@ const networkData = {
         captions: cell('partial', 'Text sent with a photo or file is preserved both ways, but it appears as a separate message rather than attached to the media.'),
         formatting: cell('oneway-in', 'Bold, italics, underlining, strikethrough, links, and @mentions received from iMessage appear in Beeper. Messages sent from Beeper are plain text. iMessage screen and bubble effects appear only as a short label.'),
         disappearing: cell('no', 'iMessage does not offer chat-wide disappearing-message timers. Its expiring audio messages are not fully synchronized: Beeper does not show their timer or offer Keep, and an expiration may not appear until the chat is reloaded.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na', 'iMessage does not show when someone is online or last active.'),
         polls: cell('partial', 'Polls appear as plain text with the question and numbered choices. You cannot create a poll, vote, see vote totals, or receive updated results from Beeper.'),
         threads: cell('na', 'iMessage uses inline replies rather than separate chat threads. Those are covered under Replies.'),
@@ -454,6 +466,7 @@ const networkData = {
         captions: cell('partial', 'Captions work with photos, videos, audio, GIFs, and files in regular picture messages, but not in newer RCS chats.'),
         formatting: cell('na'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('na'),
         threads: cell('na'),
@@ -480,6 +493,7 @@ const networkData = {
         captions: cell('yes', 'Photos and GIFs can be about 2 MB, with captions up to 160 characters.'),
         formatting: cell('na'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('na'),
         threads: cell('na'),
@@ -506,6 +520,7 @@ const networkData = {
         captions: cell('oneway-in', 'Text sent with a file in Google Chat appears in Beeper as a separate message. A caption added in Beeper is not sent as a caption and may become only the uploaded filename.'),
         formatting: cell('partial', 'Common formatting, links, mentions, code, colors, and bulleted lists work. Unsupported formatting is simplified or removed.'),
         disappearing: cell('no', 'Google Chat can remove messages after 24 hours when history is turned off. Beeper does not support this setting.'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no'),
         polls: cell('no', 'Google Chat\'s Poll app is not supported in Beeper.'),
         threads: cell('partial', 'New thread messages work. Threaded Spaces do not import older thread roots during setup, and typing indicators are shown only for the overall conversation.'),
@@ -532,6 +547,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('na'),
         disappearing: cell('no'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('na'),
         threads: cell('na'),
@@ -551,6 +567,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('na'),
         disappearing: cell('no'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('na'),
         threads: cell('na'),
@@ -577,6 +594,7 @@ const networkData = {
         captions: cell('yes', 'Captions work on media and files. With several files in one Slack message, the text may appear separately rather than on every file.'),
         formatting: cell('partial', 'Bold, italics, strikethrough, code, quotes, lists, links, mentions, and custom emoji work. Underlining is removed, headings become bold text with # marks, and some Beeper room or message links remain Beeper links.'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'Slack online and away status does not sync to Beeper.'),
         polls: cell('na'),
         threads: cell('yes', 'Threads work in DMs, group DMs, and channels. Thread history is brought in separately and may be more limited than the main conversation.'),
@@ -603,6 +621,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('partial', 'Common formatting, links, mentions, lists, quotes, and code work. Some Beeper links, @room mentions, and custom-emoji formatting are not supported.'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'Discord online and activity status does not appear in Beeper.'),
         polls: cell('no', 'Discord polls do not appear in Beeper, and you cannot create or vote in them from Beeper.'),
         threads: cell('partial', 'Public and announcement threads appear inside their parent channel, and you can create them from Beeper. Private threads cannot be created. Beeper imports up to 50 replies when it finds the thread starter. Archived threads are not fully discovered; private threads may lose their grouping or be missing. Forum and media posts are not supported.'),
@@ -629,6 +648,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('na', '@mentions work. Bold, italics, and other text styles are sent as plain text.'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'LinkedIn shows active status, but Beeper does not.'),
         polls: cell('na'),
         threads: cell('na'),
@@ -648,6 +668,7 @@ const networkData = {
         captions: cell('yes'),
         formatting: cell('na', '@mentions work. Bold, italics, and other text styles are sent as plain text.'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'LinkedIn shows active status, but Beeper does not.'),
         polls: cell('na'),
         threads: cell('na'),
@@ -674,6 +695,7 @@ const networkData = {
         captions: cell('na'),
         formatting: cell('na'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('na'),
         polls: cell('no', 'LINE has polls, but Beeper cannot create one, vote in one, or show the results yet.'),
         threads: cell('na'),
@@ -700,6 +722,7 @@ const networkData = {
         captions: cell('na'),
         formatting: cell('na'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'Tumblr has an activity status, but Beeper does not show it.'),
         polls: cell('na'),
         threads: cell('na'),
@@ -719,6 +742,7 @@ const networkData = {
         captions: cell('na'),
         formatting: cell('na'),
         disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
         online: cell('no', 'Tumblr has an activity status, but Beeper does not show it.'),
         polls: cell('na'),
         threads: cell('na'),
@@ -728,6 +752,9 @@ const networkData = {
 };
 
 const networkOrder = networks.map(nk);
+const publicNetworkOrder = networkOrder.filter(function(networkKey) {
+  return networkData[networkKey].availability === 'public';
+});
 
 const statusDefinitions = {
   yes: { label: function() { return 'Supported'; }, className: 'badge-yes', summaryBucket: 'yes' },
@@ -936,7 +963,7 @@ if (validationErrors.length > 0) {
   console.error('Support matrix data error:', validationErrors);
   notifyHeight();
 } else {
-  networkOrder.forEach(function(networkKey, index) {
+  publicNetworkOrder.forEach(function(networkKey, index) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'net-btn' + (index === 0 ? ' active' : '');
@@ -954,7 +981,7 @@ if (validationErrors.length > 0) {
     grid.appendChild(button);
   });
 
-  render(networkOrder[0]);
+  render(publicNetworkOrder[0]);
 }
 
 function notifyHeight() {
