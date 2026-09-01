@@ -985,11 +985,39 @@ if (validationErrors.length > 0) {
 }
 
 function notifyHeight() {
-  window.parent.postMessage({ type: 'resize', height: document.body.scrollHeight }, '*');
+  window.parent.postMessage({
+    type: 'resize',
+    height: Math.ceil(document.body.scrollHeight),
+  }, '*');
 }
+
+window.addEventListener('message', function(event) {
+  const allowedParentOrigins = [
+    'https://help.beeper.com',
+    'https://beeper.helpjuice.com',
+  ];
+
+  if (
+    event.source === window.parent &&
+    allowedParentOrigins.includes(event.origin) &&
+    event.data &&
+    event.data.type === 'beeper-support-matrix:measure'
+  ) {
+    notifyHeight();
+  }
+});
 
 window.addEventListener('load', notifyHeight);
 window.addEventListener('resize', notifyHeight);
+
+if ('ResizeObserver' in window) {
+  const supportMatrixResizeObserver = new ResizeObserver(notifyHeight);
+  supportMatrixResizeObserver.observe(document.body);
+}
+
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(notifyHeight);
+}
 </script>
 </body>
 </html>
