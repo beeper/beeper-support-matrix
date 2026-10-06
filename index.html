@@ -523,9 +523,29 @@ const networkData = {
   },
 
   GoogleVoice: {
-    modes: ['onDevice'],
+    modes: ['cloud', 'onDevice'],
     availability: 'public',
     support: {
+      cloud: {
+        reactions: cell('na'),
+        receipts: cell('na', 'Google Voice does not show whether the other person read a message. Beeper still keeps your own place in the conversation in sync.'),
+        push: cell('yes'),
+        replies: cell('na'),
+        files: cell('partial', 'Photos and GIFs work up to 2 MB. Documents, video, and audio cannot be sent.'),
+        voice: cell('na'),
+        history: cell('partial', 'Beeper asks Google Voice for about 20 recent conversations and roughly 50 recent messages from each. Scroll up to request older messages in similar batches; Google Voice may return more than 50 messages at once.'),
+        redactions: cell('no', 'Google Voice can delete individual messages from your own history, but Beeper cannot. Beeper can only delete the whole conversation.'),
+        createChat: cell('no'),
+        edits: cell('na'),
+        typing: cell('na'),
+        captions: cell('yes', 'Photos and GIFs can be about 2 MB, with captions up to 160 characters.'),
+        formatting: cell('na'),
+        disappearing: cell('na'),
+        timeBasedMedia: cell('no', 'Beeper does not support View Once or Allow Replay photos and videos. You may see a notice to open them in the original app, or receive them as a regular file instead.'),
+        online: cell('na'),
+        polls: cell('na'),
+        threads: cell('na'),
+      },
       onDevice: {
         reactions: cell('na'),
         receipts: cell('na', 'Google Voice does not show whether the other person read a message. Beeper still keeps your own place in the conversation in sync.'),
