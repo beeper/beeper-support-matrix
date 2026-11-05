@@ -104,7 +104,7 @@
 <main>
 <p class="section-label">Choose a chat app</p>
 <div class="network-grid" id="netGrid"></div>
-<p class="connection-intro">Choose a chat app, then choose how Beeper connects to it. <strong>Beeper Cloud</strong> keeps the connection running for you. <strong>On-Device</strong> connects through your device. <strong>Limited</strong> means the feature works with the restrictions described below. <strong>Not offered</strong> means the chat app itself does not have that feature. <strong>Not supported</strong> means the chat app has it, but this Beeper connection does not. <span class="audit-date">Information last checked November 2, 2026.</span></p>
+<p class="connection-intro">Choose a chat app, then choose how Beeper connects to it. <strong>Beeper Cloud</strong> keeps the connection running for you. <strong>On-Device</strong> connects through your device. <strong>Limited</strong> means the feature works with the restrictions described below. <strong>Not offered</strong> means the chat app itself does not have that feature. <strong>Not supported</strong> means the chat app has it, but this Beeper connection does not. <span class="audit-date">Information last checked November 5, 2026.</span></p>
 
 <div id="labelOutput"></div>
 <p id="statusOutput" class="visually-hidden" aria-live="polite"></p>
@@ -174,6 +174,7 @@ const networks = [
   'LINE',
   'Tumblr',
   'GroupMe',
+  'Reddit',
 ];
 
 function nk(networkLabel) {
@@ -842,6 +843,33 @@ const networkData = {
         online: cell('na'),
         polls: cell('partial', 'Polls work in groups. You can create single- or multiple-choice polls and vote from Beeper, and votes sync both ways. Polls created from Beeper end after 14 days, because GroupMe requires an end date. You cannot withdraw a vote, and poll reminders and final results appear as text.'),
         threads: cell('na', 'GroupMe uses replies instead of threads.'),
+      },
+    },
+  },
+
+  Reddit: {
+    modes: ['cloud'],
+    availability: 'public',
+    support: {
+      cloud: {
+        reactions: cell('partial', 'Reactions work both ways using Reddit\'s set of reaction images. From Beeper, you can react with those images or with a matching emoji; other emoji and custom reactions are not supported.'),
+        receipts: cell('partial', 'Beeper sends your read receipts to Reddit. Beeper shows other people\'s read receipts only when Reddit shares them publicly.'),
+        push: cell('yes', 'Notifications can arrive while Beeper is closed.'),
+        replies: cell('na', 'Reddit chat has no inline replies. Replying to a message from Beeper continues it as a Reddit thread.'),
+        files: cell('partial', 'Photos and GIFs (JPEG, PNG, WebP, and GIF) up to 20 MB work both ways. Reddit chat does not support videos, audio, documents, or other files, and locations are not sent.'),
+        voice: cell('na'),
+        history: cell('yes', 'Beeper adds your Reddit direct messages and group chats with recent history, including threads and reactions. Scroll up to load older messages. Messages missed while disconnected are caught up when Beeper reconnects. Deleted messages in history are hidden.'),
+        redactions: cell('partial', 'You can delete your own messages for up to 60 minutes after sending. Deleting a conversation hides a direct message for you and leaves a group.'),
+        createChat: cell('yes', 'You can search Reddit usernames to start direct messages and create group chats with a name. You can also accept or ignore message requests, rename groups, and invite or remove group members. Group roles and group photos cannot be changed from Beeper.'),
+        edits: cell('na'),
+        typing: cell('partial', 'Typing indicators work both ways, except while a message request is still pending.'),
+        captions: cell('na', 'Reddit does not show captions on images. Send text as a separate message.'),
+        formatting: cell('na', 'Reddit chat messages are plain text. @username mentions from Reddit appear as mentions in Beeper; bold, italics, and other styles are sent as plain text.'),
+        disappearing: cell('na'),
+        timeBasedMedia: cell('na'),
+        online: cell('na'),
+        polls: cell('na'),
+        threads: cell('yes', 'Threads work both ways, including thread history.'),
       },
     },
   },
